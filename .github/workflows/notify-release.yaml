@@ -7,7 +7,7 @@ on:
         default: 0.0.1
         required: false
 jobs:
-  create_issue:
+  send_notify_release_request:
     runs-on: ubuntu-latest
     permissions:
       issues: write
