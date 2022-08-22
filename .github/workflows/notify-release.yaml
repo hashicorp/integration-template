@@ -19,7 +19,7 @@ jobs:
           --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           --header 'content-type: application/json' \
           --data '{
-            "integration": "hashicorp/integration-example",
+            "integration": "packer/integration-example",
             "version": "${{ github.event.inputs.version }}",
             "sha": "main"
             }'
