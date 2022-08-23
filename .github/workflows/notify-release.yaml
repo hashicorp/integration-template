@@ -15,11 +15,10 @@ jobs:
       - name: Test
         run: |
           curl --request POST \
-          --url https://07f5-2603-8001-6e03-e8c9-2406-d06c-a6cb-a25f.ngrok.io/notify-release \
+          --url https://a4a1-2603-8001-6e03-e8c9-20f9-8515-2344-12d2.ngrok.io/products/packer/integrations/integration-example/notify-release \
           --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           --header 'content-type: application/json' \
           --data '{
-            "integration": "packer/integration-example",
             "version": "${{ github.event.inputs.version }}",
             "sha": "main"
             }'
