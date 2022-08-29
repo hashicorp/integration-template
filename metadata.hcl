@@ -1,4 +1,4 @@
-integration "packer/integration-example" {
+integration {
 	name = "Integration Example"
 	description = "This is an integration example"
 	components = [ "builder" ]
