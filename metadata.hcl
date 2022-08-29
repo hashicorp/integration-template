@@ -1,6 +1,7 @@
 integration {
 	name = "Integration Example"
 	description = "This is an integration example"
+	identifier = "packer/integration-example"
 	components = [ "builder" ]
 	license {
 		type = "MPL-2.0"
