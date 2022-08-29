@@ -1,6 +1,0 @@
-# Tab indentation
-[*]
-indent_style = tab
-
-[*.y*ml]
-indent_style = space
