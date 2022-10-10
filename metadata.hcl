@@ -1,15 +1,16 @@
 integration {
-	name = "Integration Example"
-	description = "This is an integration example"
-	identifier = "packer/integration-example"
-	components = [ "builder" ]
-	license {
-		type = "MPL-2.0"
-		url = "https://github.com/hashicorp/integration-example/blob/main/LICENSE"
-	}
-	docs {
-		process_docs = true
-		readme_location = "./README.md"
-		external_url = "https://github.com/hashicorp/integration-example"
-	}
+  name = "Integration Example"
+  description = "This is an integration template"
+  identifier = "packer/integration-template"
+  components = [ "builder" ]
+  flags = [ "hcp-ready" ]
+  license {
+    type = "MPL-2.0"
+    url = "https://github.com/hashicorp/integration-template/blob/main/LICENSE"
+  }
+  docs {
+    process_docs = true
+    readme_location = "./README.md"
+    external_url = "https://github.com/hashicorp/integration-template"
+  }
 }
