@@ -6,7 +6,7 @@ This is a template repository for creating a new Integration for a HashiCorp pro
 
 ### Metadata
 
-You will need to edit the `metadata.hcl` file in the root of this repository.
+You will need to edit the [metadata.hcl](/metadata.hcl) file in the root of this repository.
 
 - `name` (required): The name of the integration
 - `description` (required): A short description of the integration.
@@ -21,3 +21,5 @@ You will need to edit the `metadata.hcl` file in the root of this repository.
   - `external_url`: (optional, default null): The URL of any external documentation / information about the integration.  This can be specified regardless of how `process_docs` is configured.  If `process_docs` is false, this will be where clicking on the integration card in the integration library will take you.  If `process_docs` is true, there will be a link on the integration landing page to view the external URL.
 
 ### GitHub Action
+
+
