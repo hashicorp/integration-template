@@ -3,7 +3,7 @@ integration {
   description = "This is an integration template"
   identifier = "packer/integration-template"
   components = [ "builder" ]
-  flags = [ "hcp-ready" ]
+  flags = [ "archived" ]
   license {
     type = "MPL-2.0"
     url = "https://github.com/hashicorp/integration-template/blob/main/LICENSE"
