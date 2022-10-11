@@ -30,6 +30,8 @@ You will need to edit the [metadata.hcl](/metadata.hcl) file in the root of this
 
 This is a minimal configuration filling out only the required fields.
 
+This will default to the README at the root of the repo to be processed.
+
 ```hcl
 integration {
   name = "Cool Packer Integration"
@@ -38,8 +40,6 @@ integration {
   components = [ "builder" ]
 }
 ```
-
-This will default to the README at the root of the repo to be processed.
 
 #### External URL Only
 
