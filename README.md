@@ -2,6 +2,8 @@
 
 This is a template repository for creating a new Integration for a HashiCorp product.
 
+After your integration is ready & fully configured, you will need to submit a PR to the https://github.com/hashicorp/integrations repository to register your integration.
+
 ## Configuration
 
 ### Metadata
@@ -10,6 +12,7 @@ You will need to edit the [metadata.hcl](/metadata.hcl) file in the root of this
 
 - `name` (required): The name of the integration
 - `description` (required): A short description of the integration.
+- `identifier` (required): The location in the [hashicorp/integrations](https://github.com/hashicorp/integrations) repo where your integration is registered (e.g. `packer/my-plugin`).
 - `license` (optional): An object describing how the plugin is licensed.
   - `type` (optional): The license type
   - `url` (optional): A URL that points to the full license
@@ -21,5 +24,4 @@ You will need to edit the [metadata.hcl](/metadata.hcl) file in the root of this
   - `external_url`: (optional, default null): The URL of any external documentation / information about the integration.  This can be specified regardless of how `process_docs` is configured.  If `process_docs` is false, this will be where clicking on the integration card in the integration library will take you.  If `process_docs` is true, there will be a link on the integration landing page to view the external URL.
 
 ### GitHub Action
-
 
