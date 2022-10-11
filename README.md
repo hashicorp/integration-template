@@ -62,3 +62,16 @@ integration {
 
 ### GitHub Action
 
+There is a GitHub Action provided that will enable you to notify our integrations registry that there is a new release for your integration available.
+
+We have two GitHub workflows provided that leverage this action.
+
+#### [Notify Integration Release via GitHub Actions UI](.github/workflows/notify-release-via-manual.yaml)
+
+This is a predefined workflow that will allow you to trigger the Notify Release action manually from the UI.
+
+![Screenshot of Action Triggere from UI](https://user-images.githubusercontent.com/2105067/195161825-8a1fb3f1-7c58-4c88-8e1d-d6bc45d479af.png)
+
+#### [Notify Integration Release via Git Tag](.github/workflows/notify-release-via-tag.yaml)
+
+This is a predefined workflow that will allow you to trigger the Notify Release action from a new git tag.
