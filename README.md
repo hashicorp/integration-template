@@ -64,6 +64,8 @@ integration {
 
 There is a GitHub Action provided that will enable you to notify our integrations registry that there is a new release for your integration available.
 
+> NOTE: You must update the provided GitHub Actions and give them the proper `integration_identifier`, which is identical to the `identifier` key in the HCL file.
+
 We have two GitHub workflows provided that leverage this action.
 
 #### [Notify Integration Release via GitHub Actions UI](.github/workflows/notify-release-via-manual.yaml)
