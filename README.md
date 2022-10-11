@@ -60,6 +60,16 @@ integration {
 }
 ```
 
+## Triggering Releases
+
+Whenever you have made significant updates to your integration, you must notify us via a provided GitHub Actions for us to fetch your updates & reflect them on HashiCorp Developer. Releases can be made via the GitHub Actions specified below.
+
+After registering your integration in [hashicorp/integrations](https://github.com/hashicorp/integrations), you must first trigger an initial release before appearing on HashiCorp Developer.
+
+Releases must follow Semver (`X.X.X` for proper releases, `X.X.X-abc` for pre-releases). Proper releases will be navigatable in HashiCorp Developer by end-users.  Pre-releases are only navigatable via directly going to the URL. This may be useful for previewing what a release will look like on the website before properly making a release.
+
+To update an old release, you can trigger the Notify Release workflow on the same Semver and we will overwrite the old release. This may be useful for fixing typos, making small adjustments, etc.
+
 ### GitHub Action
 
 There is a GitHub Action provided that will enable you to notify our integrations registry that there is a new release for your integration available.
