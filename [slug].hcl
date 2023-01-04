@@ -6,7 +6,10 @@
 # before submitting a PR to register an integration within hashicorp/integrations.
 
 remote_integration {
-  id       = "ead32ac0-49df-4664-ac06-49ce39f7a2f0"
-  repo_url = "https://github.com/thiskevinwang/waypoint"
-  tier     = "community"
+  # this is an arbitrary uuid, only used for demo purposes
+  id = "ead32ac0-49df-4664-ac06-49ce39f7a2f0"
+  # adjust accordingly
+  repo_url = "https://github.com/owner/repo"
+  # official | community | partner
+  tier = "community"
 }
