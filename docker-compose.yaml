@@ -1,0 +1,118 @@
+version: "3.9"
+services:
+  # ==================================
+  # ========== API Database ==========
+  # ==================================
+  api_database:
+    logging:
+      driver: none
+    container_name: api_database
+    restart: always
+    image: postgres:14
+    environment:
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_SSL_MODE
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    command: -p ${POSTGRES_PORT}
+
+  # ===============================
+  # ========== API ==========
+  # ===============================
+  api:
+    container_name: api
+    command:
+      [
+        "./scripts/wait-for-it.sh",
+        "api_database:${POSTGRES_PORT}",
+        "--",
+        "npm",
+        "run",
+        "start",
+      ]
+    image: public.ecr.aws/d4t3o3o7/integrations-api:latest
+    environment:
+      - GH_PAT
+      - PORT=${API_PORT}
+      - ADMIN_TOKEN
+      - AUTH0_DOMAIN=https://auth.hashicorp.com
+      - ALLOWED_WEB_ORIGIN=*
+      - API_URL=http://localhost:${API_PORT}
+      - NODE_ENV=development
+      - HASHI_ENV=development
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_HOST=api_database
+      - POSTGRES_PORT
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    depends_on:
+      - api_database
+    links:
+      - api_database
+
+  # # ==================================
+  # # ========== Content Sync ==========
+  # # ==================================
+  content_sync_and_consume_release:
+    tty: true
+    command:
+      [
+        "/app/.scripts/wait-for-it.sh",
+        "api:${API_PORT}",
+        "--",
+        "/bin/bash",
+        "-c",
+        "node ./content-sync.js && node ./consume-release.js",
+      ]
+
+    container_name: content_sync_and_consume_release
+    image: public.ecr.aws/d4t3o3o7/integrations:latest
+    volumes:
+      # We mount [slug].hcl to simulate the precondition
+      # that the integration was already registered, so
+      # that it may be synced. This step is necessary
+      # for `consume-release` to work.
+      - type: bind
+        source: ./[slug].hcl
+        target: /app/${INPUT_INTEGRATION_IDENTIFIER}.hcl
+        read_only: true
+      # Mount this repo into the container to simulate the checkout
+      # process for `consume-release`
+      - type: bind
+        source: .
+        target: /app/${INPUT_INTEGRATION_REPO_PATH}
+        read_only: true
+    environment:
+      - INPUT_INTEGRATIONS_REPO_PATH
+      - INPUT_INTEGRATIONS_API_BASE_URL
+      - INPUT_INTEGRATIONS_API_ADMIN_TOKEN
+      - NODE_ENV
+      - INPUT_INTEGRATION_IDENTIFIER
+      - INPUT_INTEGRATION_REPO_PATH
+      - INPUT_INTEGRATION_VERSION
+    depends_on:
+      - api
+    links:
+      - api
+
+  # ==============================
+  # ========== Frontend ==========
+  # ==============================
+  frontend:
+    container_name: dev_portal_frontend
+    # TODO: swap these when integrations is merged into dev-portal#main
+    # image: hashicorp/dev-portal:latest
+    build: https://github.com/hashicorp/dev-portal.git#product-integrations
+    environment:
+      - HASHI_ENV=development
+      - NEXT_PUBLIC_INTEGRATIONS_API_BASE_URL=http://api:${API_PORT}
+    ports:
+      - ${FRONTEND_PORT}:3000
+    depends_on:
+      - api
+    links:
+      - api
