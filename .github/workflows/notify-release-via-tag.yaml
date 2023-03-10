@@ -2,23 +2,28 @@ name: Notify Integration Release (Tag)
 on:
   push:
     tags:
-      - '*.*.*'   # Semver
-      - '*.*.*-*' # Pre Releases
+      - '*.*.*'   # Proper releases
+      - '*.*.*-*' # Pre releases
 jobs:
   notify-release:
     runs-on: ubuntu-latest
     steps:
-      # TODO, this will be moved to a published action
       - name: Checkout integration-release-action
         uses: actions/checkout@v2
         with:
-          repository: BrandonRomano/integration-release-action
+          repository: hashicorp/integration-release-action
           path: ./integration-release-action
-
       - name: Notify Release
         uses: ./integration-release-action
         with:
-          integration_identifier: 'product/your-integration-here'
+          # integration_identifier should match the directory path of your
+          # registration file in https://github.com/hashicorp/integrations.
+          #
+          # For example, looking at this registration file:
+          # https://github.com/hashicorp/integrations/blob/main/waypoint/hashicorp/docker.hcl
+          #                                                     ↑-----------------------↑
+          # The integration identifier for this integration is `waypoint/hashicorp/docker`
+          integration_identifier: 'product/organization/integration'
           release_version: ${{ github.ref_name }}
           release_sha: ${{ github.ref }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
