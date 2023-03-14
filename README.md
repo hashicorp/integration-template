@@ -12,17 +12,20 @@ You will need to edit the [metadata.hcl](/metadata.hcl) file in the root of this
 
 - `name` (required): The name of the integration
 - `description` (required): A short description of the integration.
-- `identifier` (required): The location in the [hashicorp/integrations](https://github.com/hashicorp/integrations) repo where your integration is registered (e.g. `packer/my-plugin`).
+- `identifier` (required): The location in the [hashicorp/integrations](https://github.com/hashicorp/integrations) repo where your integration is registered (e.g. `waypoint/hashicorp/docker`).
 - `license` (optional): An object describing how the plugin is licensed.
   - `type` (optional): The license type
   - `url` (optional): A URL that points to the full license
-- `components` (required): An array of components that the integration has. There is an enumerated list of valid components on a per-product basis that can be found in the integration config in hashicorp/integrations ([example](https://github.com/hashicorp/integrations/blob/main/packer/_config.hcl))
 - `flags` (optional): An array of conditional flags. A list of valid flags can be found [here](https://github.com/hashicorp/integrations/blob/main/flags.hcl).
 - `docs` (optional): An object describing the docs setup
   - `process_docs`: (optional, default true): true if this integration has README docs that we want to render in HashiCorp Developer, false otherwise. If false, `external_url` is required.
   - `readme_location`: (optional, default ./README.md): The location of the README file.  Ignored if `process_docs` is false.
   - `external_url`: (optional, default null): The URL of any external documentation / information about the integration.  This can be specified regardless of how `process_docs` is configured.  If `process_docs` is false, this will be where clicking on the integration card in the integration library will take you.  If `process_docs` is true, there will be a link on the integration landing page to view the external URL.
 
+- `component` (at least one required): An object representing a component of the integration.
+  - `type` (required): The component type. There is an enumerated list of valid components on a per-product basis that can be found in the integration config in hashicorp/integrations ([example](https://github.com/hashicorp/integrations/blob/main/waypoint/_config.hcl)). This value must be the slug of one of those components.
+  - `name` (required): The name of your component.
+  - `slug` (required): The slug of the component, used to determine the component page URL in HashiCorp Developer.
 
 ### metadata.hcl Examples
 
@@ -36,8 +39,12 @@ This will default to the README at the root of the repo to be processed.
 integration {
   name = "Cool Packer Integration"
   description = "A simple integration that shows how cool Packer is."
-  identifier = "packer/cool-packer-integration"
-  components = [ "builder" ]
+  identifier = "packer/hashicorp/cool-packer-integration"
+  component {
+    type = "builder"
+    name = "Cool Builder"
+    slug = "cool-builder"
+  }
 }
 ```
 
@@ -51,11 +58,15 @@ Your integration will still appear on HashiCorp Developer when users are searchi
 integration {
   name = "Cool Packer Integration"
   description = "A simple integration that shows how cool Packer is."
-  identifier = "packer/cool-packer-integration"
-  components = [ "builder" ]
+  identifier = "packer/hashicorp/cool-packer-integration"
   docs {
     process_docs = false
     external_url = "https://example.com/cool-packer-integration"
+  }
+  component {
+    type = "builder"
+    name = "Cool Builder"
+    slug = "cool-builder"
   }
 }
 ```
