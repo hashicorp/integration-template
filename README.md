@@ -4,6 +4,8 @@ This is a template repository for creating a new Integration for a HashiCorp pro
 
 After your integration is ready & fully configured, you will need to submit a PR to the https://github.com/hashicorp/integrations repository to register your integration.
 
+> Note: The integrations repository is in a closed-beta. We are currently working with integration partners directly, and we plan to open source the integrations registry in the future.
+
 ## Metadata Configuration
 
 You will need to edit the [metadata.hcl](/metadata.hcl) file in the root of this repository.
@@ -18,9 +20,10 @@ You will need to edit the [metadata.hcl](/metadata.hcl) file in the root of this
   - `url` (optional): A URL that points to the full license
 - `flags` (optional): An array of conditional flags. A list of valid flags can be found [here](https://github.com/hashicorp/integrations/blob/main/flags.hcl).
 - `docs` (optional): An object describing the docs setup
+
   - `process_docs`: (optional, default true): true if this integration has README docs that we want to render in HashiCorp Developer, false otherwise. If false, `external_url` is required.
-  - `readme_location`: (optional, default ./README.md): The location of the README file.  Ignored if `process_docs` is false.
-  - `external_url`: (optional, default null): The URL of any external documentation / information about the integration.  This can be specified regardless of how `process_docs` is configured.  If `process_docs` is false, this will be where clicking on the integration card in the integration library will take you.  If `process_docs` is true, there will be a link on the integration landing page to view the external URL.
+  - `readme_location`: (optional, default ./README.md): The location of the README file. Ignored if `process_docs` is false.
+  - `external_url`: (optional, default null): The URL of any external documentation / information about the integration. This can be specified regardless of how `process_docs` is configured. If `process_docs` is false, this will be where clicking on the integration card in the integration library will take you. If `process_docs` is true, there will be a link on the integration landing page to view the external URL.
 
 - `component` (at least one required): An object representing a component of the integration.
   - `type` (required): The component type. There is an enumerated list of valid components on a per-product basis that can be found in the integration config in hashicorp/integrations ([example](https://github.com/hashicorp/integrations/blob/main/waypoint/_config.hcl)). This value must be the slug of one of those components.
@@ -77,7 +80,7 @@ Whenever you have made significant updates to your integration, you must notify 
 
 After registering your integration in [hashicorp/integrations](https://github.com/hashicorp/integrations), you must first trigger an initial release before appearing on HashiCorp Developer.
 
-Releases must follow Semver (`X.X.X` for proper releases, `X.X.X-abc` for pre-releases). Proper releases will be navigatable in HashiCorp Developer by end-users.  Pre-releases are only navigatable via directly going to the URL. This may be useful for previewing what a release will look like on the website before properly making a release.
+Releases must follow Semver (`X.X.X` for proper releases, `X.X.X-abc` for pre-releases). Proper releases will be navigatable in HashiCorp Developer by end-users. Pre-releases are only navigatable via directly going to the URL. This may be useful for previewing what a release will look like on the website before properly making a release.
 
 To update an old release, you can trigger the Notify Release workflow on the same Semver and we will overwrite the old release. This may be useful for fixing typos, making small adjustments, etc.
 
