@@ -25,7 +25,7 @@ You will need to edit the [metadata.hcl](/metadata.hcl) file in the root of this
   - `process_docs`: (optional, default true): true if this integration has README docs that we want to render in HashiCorp Developer, false otherwise. If false, `external_url` is required.
   - `readme_location`: (optional, default ./README.md): The location of the README file. Ignored if `process_docs` is false.
   - `external_url`: (optional, default null): The URL of any external documentation / information about the integration. This can be specified regardless of how `process_docs` is configured. If `process_docs` is false, this will be where clicking on the integration card in the integration library will take you. If `process_docs` is true, there will be a link on the integration landing page to view the external URL.
-- `component`: An object representing a component of the integration.
+- `component` (optional): An object representing a component of the integration.
   - `type` (required): The component type. There is an enumerated list of valid components on a per-product basis that can be found in the integration config in hashicorp/integrations ([example](https://github.com/hashicorp/integrations/blob/main/waypoint/_config.hcl)). This value must be the slug of one of those components.
   - `name` (required): The name of your component.
   - `slug` (required): The slug of the component, used to determine the component page URL in HashiCorp Developer.
