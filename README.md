@@ -19,7 +19,7 @@ You will need to edit the [metadata.hcl](/metadata.hcl) file in the root of this
 - `license` (optional): An object describing how the plugin is licensed.
   - `type` (optional): The license type
   - `url` (optional): A URL that points to the full license
-- `flags` (optional): An array of conditional flags. A list of valid flags can be found [here](https://github.com/hashicorp/integrations/blob/main/flags.hcl).
+- `flags` (optional): An array of conditional flags. A list of valid flags can be found [here](#valid-flags).
 - `docs` (optional): An object describing the docs setup
 
   - `process_docs`: (optional, default true): true if this integration has README docs that we want to render in HashiCorp Developer, false otherwise. If false, `external_url` is required.
@@ -29,6 +29,15 @@ You will need to edit the [metadata.hcl](/metadata.hcl) file in the root of this
   - `type` (required): The component type. There is an enumerated list of valid components on a per-product basis that can be found in the integration config in hashicorp/integrations ([example](https://github.com/hashicorp/integrations/blob/main/waypoint/_config.hcl)). This value must be the slug of one of those components.
   - `name` (required): The name of your component.
   - `slug` (required): The slug of the component, used to determine the component page URL in HashiCorp Developer.
+
+#### Valid flags
+
+In the `metadata.hcl` file, you may use any of the following flags:
+
+- "archived": This integration is no longer maintained
+- "hcp-ready": This integration has been tested to work with HashiCorp Cloud Platform (HCP)
+
+Note: if you use a flag that doesn't exist in your configuration, the ingestion will fail, but because of how ingestion is performed, you will not have a failure when running the action, instead the plugin's documentation will be empty.
 
 ### metadata.hcl Examples
 
